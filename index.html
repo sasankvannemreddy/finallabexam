@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+            text-align: center;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Login</h2>
+
+    <input type="email" id="email" placeholder="Enter Email">
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="login()">Login</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+    // Sample user saved in localStorage
+    if (!localStorage.getItem("user")) {
+        localStorage.setItem("user", JSON.stringify({
+            name: "Sasank",
+            email: "sasank@gmail.com",
+            password: "12345"
+        }));
+    }
+
+    function login() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        let user = JSON.parse(localStorage.getItem("user"));
+
+        if (email === user.email && password === user.password) {
+            document.getElementById("message").style.color = "green";
+            document.getElementById("message").innerText = "Login successful!";
+
+            // Save logged-in user
+            localStorage.setItem("loggedInUser", user.name);
+
+            // Redirect to welcome page
+            setTimeout(() => {
+                window.location.href = "welcome.html";
+            }, 1000);
+        } else {
+            document.getElementById("message").innerText =
+                "Invalid email or password";
+        }
+    }
+</script>
+
+</body>
+</html>

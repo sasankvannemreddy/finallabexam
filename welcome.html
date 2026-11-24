@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome Page</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #e8f0ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="welcome"></h1>
+    <p>Login successful! Welcome to our website.</p>
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+    // Check whether user is logged in
+    let name = localStorage.getItem("loggedInUser");
+
+    if (!name) {
+        window.location.href = "index.html";
+    } else {
+        document.getElementById("welcome").innerText =
+            "Welcome, " + name + "!";
+    }
+
+    function logout() {
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
